@@ -42,6 +42,7 @@ nav ul { list-style:none; padding:0; margin:0; }
 nav li { margin:0.75rem 0; }
 nav a { color:#111; text-decoration:none; font-weight:500; }
 nav a:hover { text-decoration:underline; }
+nav a:visited { color: #111; }
 
 /* ---- links in body copy ---- */
 p a {
@@ -195,6 +196,7 @@ footer {
 /* Menu button default (desktop hidden) */
 .nav-toggle {
   display: none;
+  color: #111;
 }
 
 /* Mobile menu button fixed top-left; content offset handled below */
