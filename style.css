@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  background: #fafafa;
+  color: #111;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Base body-copy styling */
+p {
+  line-height: 1.6;      /* more/less internal line spacing */
+  margin-bottom: 1.25rem;  /* extra room after each paragraph */
+  /* optional extras: */
+  /* letter-spacing: 0.02em;   wider characters */
+  /* max-width: 60ch;          comfortable line length */
+}
+
+
+/* Sidebar (desktop defaults) */
+nav {
+  background: #fafafa;
+  width: 200px;
+  padding: 1.5rem 1rem;
+  z-index: 1200;
+  flex-shrink: 0;
+}
+
+.home-link { color:#111; text-decoration:none; }
+
+nav h1 { font-size: 1rem; font-weight: 700; margin: 0 0 0.75rem; }
+nav ul { list-style:none; padding:0; margin:0; }
+nav li { margin:0.75rem 0; }
+nav a { color:#111; text-decoration:none; font-weight:500; }
+nav a:hover { text-decoration:underline; }
+
+/* ---- links in body copy ---- */
+p a {
+  color: #111;          /* or #000 if you prefer true black  */
+  text-decoration: underline;   /* keep or remove as you like */
+}
+
+/* if you also want visited links to stay black */
+p a:visited {
+  color: #111;
+}
+
+
+/* Toggle button */
+
+
+#overlay {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  z-index:1100;
+}
+
+main { flex:1; padding:2rem 1.5rem; }
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1rem;
+}
+
+/* —— three-across portrait row —— */
+.grid.three      { grid-template-columns: repeat(3, 1fr); }
+
+.grid.four      { grid-template-columns: repeat(4, 1fr); }
+
+/* keep the 1-column collapse on phones */
+@media (max-width: 700px) {
+  .grid.three    { grid-template-columns: 1fr; }
+  .grid.four    { grid-template-columns: 1fr; }
+}
+
+/* space above a .grid.three that comes right after any .grid */
+.grid + .grid.three {
+  margin-top: 1rem;   /* adjust to taste (1rem ≈ 16 px) */
+}
+
+.grid + .grid.four {
+  margin-top: 1rem;   /* adjust to taste (1rem ≈ 16 px) */
+}
+
+/* space above a stacked grid */
+.grid + .grid {
+  margin-top: 4rem;   /* adjust to taste (1rem ≈ 16 px) */
+}
+
+
+.grid img { width:100%; height:auto; cursor:zoom-in; }
+
+.grid.four img {
+  max-height: 380px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.description {
+  margin-left: 0; margin-top: 2rem; font-size:0.95rem; color:#555;   max-width:600px;
+  margin-top: 2rem;
+  margin-top: 2rem;
+}
+
+/* Homepage grid */
+.projects-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1.5rem;
+}
+
+.project-card { text-decoration:none; color:inherit; transition:transform .2s; }
+.project-card img { width:100%; height:auto; }
+.project-card h3 { margin-top:.5rem; font-weight:600; margin: 0.4rem 0 0.15rem; }
+.project-card:hover { transform:translateY(-2px); }
+
+footer {
+  width:100%;
+  text-align:center;
+  font-size:0.8rem;
+  padding:1rem 0;
+  color:#888;
+}
+
+/* Lightbox */
+#lightbox {
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1500;
+  overflow:hidden;
+}
+#lightbox.open { display:flex; }
+#lightbox img { max-width:90%; max-height:90%; }
+
+.lb-close {
+  position:absolute;
+  top:1rem;
+  right:1rem;
+  font-size:2rem;
+  color:#fff;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  /* Homepage – single column */
+  .projects-grid {
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  
+
+  /* Drawer style nav */
+  nav { top: 0; padding-top: 3.5rem;
+    position:fixed;
+    
+    left:0;
+    height:100%;
+    transform:translateX(-100%);
+    transition:transform .3s ease;
+  }
+  nav.open { transform:translateX(0); }
+
+  /* Content grids single column */
+  .grid { grid-template-columns:1fr; }
+}
+
+
+
+@media (max-width: 700px) {
+  
+}
+
+
+/* Menu button default (desktop hidden) */
+.nav-toggle {
+  display: none;
+}
+
+/* Mobile menu button fixed top-left; content offset handled below */
+@media (max-width: 700px) {
+  .nav-toggle {
+    display: block;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 1400;
+  }
+
+
+  /* Push main content below button height */
+  main {
+    margin-top: 3.5rem;
+  }
+}
+
+/*  desktop ≥ 701 px  ───────────────────────────────── */
+@media (min-width: 701px) {
+  #sideNav {
+    position: fixed;   /* stay glued to viewport, not to its parent */
+    top: 0;
+    left: 0;
+    width: 200px;      /* same width you already set */
+    height: 100vh;     /* optional but fills the edge visually */
+    overflow-y: auto;  /* add if you expect a very long menu */
+  }
+
+  /* push main content to the right the same amount */
+  main {
+    margin-left: 200px;
+  }
+
+  /* hide the mobile-only overlay & hamburger */
+  #overlay,
+  .nav-toggle {
+    display: none;
+  }
+}
+
+.card-sub {
+  margin-top: 0.25rem;
+ /* font-size: 0.9rem; */
+  color: #666;
+}
