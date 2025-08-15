@@ -248,3 +248,62 @@ footer {
  /* font-size: 0.9rem; */
   color: #666;
 }
+
+
+/* === Responsive image grid tweaks (applied to all non-home pages) === */
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr; /* mobile: single column */
+}
+
+/* Desktop: max two images per row */
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* Wrap each image in a .grid-item to control sizing & centering */
+.grid > .grid-item {
+  display: flex;
+  align-items: center;        /* vertical centering of the image in its box */
+  justify-content: center;    /* horizontal centering */
+  overflow: hidden;
+  /* Base portrait box height; landscape uses 3/4 of this */
+  --portrait-size: min(78vh, 82svh);
+}
+
+/* Portrait items take the full base height; landscape items take 3/4 height and center */
+.grid > .grid-item.portrait { block-size: var(--portrait-size); }
+.grid > .grid-item.landscape { block-size: calc(var(--portrait-size) * 0.75); align-self: center; }
+
+/* Make images scale to fit their boxes without distortion */
+.grid > .grid-item img {
+  max-inline-size: 100%;
+  max-block-size: 100%;
+  inline-size: auto;
+  block-size: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* When two different widths stack in a column, keep them centered */
+.grid {
+  justify-items: center;
+}
+.grid > .grid-item { inline-size: 100%; }
+
+/* Optional: fine-tune by detected aspect ratios if needed */
+.grid > .grid-item[data-ratio="4-3"] img,
+.grid > .grid-item[data-ratio="3-2"] img,
+.grid > .grid-item[data-ratio="5-4"] img {
+  /* No overrides yet; placeholders left for future tuning */
+}
+
+/* Ensure older rules don't force images full-width */
+.grid img { width: auto !important; height: auto !important; }
+.grid.four img { max-height: none !important; object-fit: contain !important; object-position: center center !important; }
+
